@@ -2,10 +2,15 @@
     require "model/accounts.php";
     include "layout/header.php";
     $accounts = get_accounts();
+    session_start();
+    if(!isset($_SESSION["user"])) {
+      header('Location: login.php');  
+      exit();
+    }
 ?>
 
 <h2>Vos comptes en banque</h2>
-
+<a href="logout.php" class="btn btn-dark text-white">Déconnexion</a>
 <div class="row">
     <?php foreach ($accounts as $index => $account): ?>
         <div class="col-6 col-md-4">
